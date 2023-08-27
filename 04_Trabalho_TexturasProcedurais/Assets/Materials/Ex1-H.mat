@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ex1-H
-  m_Shader: {fileID: 4800000, guid: 00e7ebb4b8de7f659b4d6cb4af8f3652, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8c68ba65c1923bbfaa51019b7231109e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4

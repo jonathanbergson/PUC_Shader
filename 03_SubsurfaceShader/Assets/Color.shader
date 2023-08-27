@@ -25,7 +25,7 @@ Shader "Custom/Color"
         {
             // float3 c = _A * IN.uv_MainTex.x + _B;
             // o.Emission = round(c);
-            
+
             float x = IN.uv_MainTex.x;
             float f = _A * x + _B;
             o.Emission = (f + _ColorDark) * _ColorLight;

@@ -2,7 +2,7 @@ Shader "Custom/Shader_Ex1-D"
 {
     Properties
     {
-        _A ("A", Range(0, 100)) = 1
+        _Size ("Size", Range(0, 100)) = 100
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
     }
     SubShader
@@ -16,14 +16,14 @@ Shader "Custom/Shader_Ex1-D"
             float2 uv_MainTex;
         };
 
-        float _A;
+        float _Size;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             half x = IN.uv_MainTex.x;
             half y = IN.uv_MainTex.y;
 
-            half a = x * 100;
-            half b = y * 100;
+            half a = x * _Size;
+            half b = y * _Size;
 
             half c = ceil(sin(-a + b));
             o.Emission = c;

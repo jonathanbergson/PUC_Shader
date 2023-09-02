@@ -23,11 +23,12 @@ Shader "Custom/Shader_Ex2"
             float lineH = round(saturate(sin(y * 3.14 * 6) * 0.5 + 0.5));
             float lineV = round(saturate(sin(x * 3.14 * 6) * 0.5 + 0.5));
 
+            float timeRef = _Time.y;
             float xadrez = abs(lineH - lineV);
-            float3 r = xadrez * float3(1, 0, 0);
-            float3 g = (1 - xadrez) * float3(0, 1, 0);
+            float3 r = xadrez * float3(1, 0, 0) * sin(timeRef);
+            float3 g = (1 - xadrez) * float3(0, 1, 0) * cos(timeRef);
 
-            o.Emission = r + g;
+            o.Emission = abs(r + g);
         }
         ENDCG
     }

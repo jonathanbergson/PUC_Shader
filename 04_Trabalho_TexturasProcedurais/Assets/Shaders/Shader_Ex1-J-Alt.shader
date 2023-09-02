@@ -21,6 +21,7 @@ Shader "Custom/Shader_Ex1-J-Alt"
 
         float circle(float2 uv, float2 c, float r)
         {
+            // NOTE: Todo ponto da UV que estiver fora do raio de círculo, pinta de branco
             if (length(uv - c) > r) {
                 return 1;
             } else {

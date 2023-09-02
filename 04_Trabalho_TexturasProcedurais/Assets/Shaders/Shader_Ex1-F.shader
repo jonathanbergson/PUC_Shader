@@ -28,13 +28,7 @@ Shader "Custom/Shader_Ex1-F"
             float y = IN.uv_MainTex.y;
             float s1 = sin(x * 3.14) * a;
             float s2 = sin(y * 3.14) * a;
-            o.Emission = saturate((s1 * s2) * b);
-
-            // float x = IN.uv_MainTex.x;
-            // float y = IN.uv_MainTex.y;
-            // float h = 0.5 * x + 0;
-            // float v = 0.5 * y + 0;
-            // o.Emission = (x * y * (1 - x) * (1 - y)) * 6;
+            o.Emission = saturate((s1 * s2) * b); // NOTE: Mescla duas funções seno
         }
         ENDCG
     }

@@ -27,9 +27,9 @@ Shader "Custom/Shader_Ex1-B-Alt"
 
             float g1 = abs(x - y) * _Scale + _Displacement;
             float g2 = abs(y - x);
-            float gradient = (g1 + g2);
+            float gradient = (g1 + g2); // NOTE: Cria um efeito de gradiente
 
-            float r = (1 - gradient);
+            float r = (1 - gradient); // NOTE: Inverte o gradiente
             float b = gradient;
 
             o.Emission = float3(r, 0, b);

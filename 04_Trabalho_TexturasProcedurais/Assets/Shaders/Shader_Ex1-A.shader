@@ -18,7 +18,7 @@ Shader "Custom/Shader_Ex1-A"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float3 x = IN.uv_MainTex.x;
-            o.Emission = 1 - x;
+            o.Emission = 1 - x; // NOTE: Inverte a cor da textura
         }
         ENDCG
     }

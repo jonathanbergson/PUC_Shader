@@ -22,9 +22,10 @@ Shader "Custom/Shader_Ex1-H"
             float x = IN.uv_MainTex.x;
             float y = IN.uv_MainTex.y;
 
+            // NOTE: Cria duas texturas, uma com a linha horizontal e outra com a vertical
             float lineH = round(x);
             float lineV = 1 - round(y);
-            o.Emission = abs(lineH - lineV) + _Color;
+            o.Emission = abs(lineH - lineV) + _Color; // NOTE: Pinta o preto de azul
         }
         ENDCG
     }

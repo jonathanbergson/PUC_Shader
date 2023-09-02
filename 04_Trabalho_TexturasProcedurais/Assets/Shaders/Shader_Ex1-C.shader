@@ -20,8 +20,8 @@ Shader "Custom/Shader_Ex1-C"
             float x = IN.uv_MainTex.x;
             float y = IN.uv_MainTex.y;
 
-            float r = (x + y);
-            float g = 1 - (y - x);
+            float r = (x + y); // NOTE: gera um gradiente de preto para branco
+            float g = 1 - (y - x); // NOTE: inverte o gradiente
             o.Emission = float3(r, g, 1);
         }
         ENDCG

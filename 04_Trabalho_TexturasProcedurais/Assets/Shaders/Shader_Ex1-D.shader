@@ -22,10 +22,11 @@ Shader "Custom/Shader_Ex1-D"
             half x = IN.uv_MainTex.x;
             half y = IN.uv_MainTex.y;
 
+            // NOTE: Achata os dois eixos de UV
             half a = x * _Size;
             half b = y * _Size;
 
-            half c = ceil(sin(-a + b));
+            half c = ceil(sin(-a + b)); // NOTE: Mescla os dois eixos de UV e arrendonda para cima
             o.Emission = c;
         }
         ENDCG

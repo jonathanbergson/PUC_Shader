@@ -17,8 +17,8 @@ Shader "Custom/Shader_Ex1-A"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            float3 c = -1 * IN.uv_MainTex.x + 1;
-            o.Emission = c;
+            float3 x = IN.uv_MainTex.x;
+            o.Emission = 1 - x;
         }
         ENDCG
     }

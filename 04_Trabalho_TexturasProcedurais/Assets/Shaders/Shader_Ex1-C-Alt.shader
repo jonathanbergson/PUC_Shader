@@ -1,8 +1,10 @@
-Shader "Custom/Shader_Ex1-C"
+Shader "Custom/Shader_Ex1-C-Alt"
 {
     Properties
     {
+        _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _A ("A", Range(-10, 10)) = 1
     }
     SubShader
     {
@@ -15,6 +17,8 @@ Shader "Custom/Shader_Ex1-C"
             float2 uv_MainTex;
         };
 
+        float4 _Color;
+        float _A, _B;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float x = IN.uv_MainTex.x;

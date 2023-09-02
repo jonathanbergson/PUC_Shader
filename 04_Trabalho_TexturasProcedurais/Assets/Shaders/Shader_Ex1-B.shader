@@ -23,9 +23,10 @@ Shader "Custom/Shader_Ex1-B"
         {
             float x = IN.uv_MainTex.x;
             float f = (2 * x + -1);
+            float ff = f * f;
 
-            float3 colorA = clamp(f * f * -1 + 1 * _ColorA, 0, 1);
-            float3 colorB = clamp(f * f * _ColorB, 0, 1);
+            float3 colorA = saturate(ff * -1 + 1 * _ColorA);
+            float3 colorB = saturate(ff * _ColorB);
 
             o.Emission = colorA + colorB;
         }

@@ -1,5 +1,6 @@
-Shader "Custom/Shader_Ex1-C"
+Shader "Custom/Shader_Ex1-B-Alt"
 {
+
     Properties
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
@@ -20,9 +21,14 @@ Shader "Custom/Shader_Ex1-C"
             float x = IN.uv_MainTex.x;
             float y = IN.uv_MainTex.y;
 
-            float r = (x + y);
-            float g = 1 - (y - x);
-            o.Emission = float3(r, g, 1);
+            float g1 = abs(x - y);
+            float g2 = abs(y - x);
+            float gradient = (g1 + g2);
+
+            float3 r = (1 - gradient) * float3(1, 0, 0);
+            float3 b = gradient * float3(0, 0, 1);
+
+            o.Emission = r + b;
         }
         ENDCG
     }

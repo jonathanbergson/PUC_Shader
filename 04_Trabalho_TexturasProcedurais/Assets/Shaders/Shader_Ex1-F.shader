@@ -23,18 +23,18 @@ Shader "Custom/Shader_Ex1-F"
         float _Size, _A, _B;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            // a = 0.5, b = 6
-            // float x = IN.uv_MainTex.x;
-            // float y = IN.uv_MainTex.y;
-            // float h = sin(x * 3.14) * _A;
-            // float v = sin(y * 3.14) * _A;
-            // o.Emission = saturate((h * v) * _B);
-
+            float a = 0.5, b = 6;
             float x = IN.uv_MainTex.x;
             float y = IN.uv_MainTex.y;
-            float h = (_A * x * 4 + _B);
-            float v = _A * y + _B;
-            o.Emission = h;
+            float s1 = sin(x * 3.14) * a;
+            float s2 = sin(y * 3.14) * a;
+            o.Emission = saturate((s1 * s2) * b);
+
+            // float x = IN.uv_MainTex.x;
+            // float y = IN.uv_MainTex.y;
+            // float h = 0.5 * x + 0;
+            // float v = 0.5 * y + 0;
+            // o.Emission = (x * y * (1 - x) * (1 - y)) * 6;
         }
         ENDCG
     }

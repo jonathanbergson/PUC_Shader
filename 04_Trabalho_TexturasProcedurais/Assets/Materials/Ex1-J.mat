@@ -58,7 +58,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _A: 1
+    - _A: 0.6
     - _B: 0
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -77,8 +77,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorDark: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorLight: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 0, b: 1, a: 1}
+    - _ColorDark: {r: 0.9150943, g: 0.056114297, b: 0.056114297, a: 1}
+    - _ColorLight: {r: 0.12465871, g: 0.5754717, b: 0.08957815, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

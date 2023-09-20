@@ -1,4 +1,4 @@
-Shader "Custom/Shader_Circle"
+Shader "Custom/Shader_Ex1-J-Alt"
 {
     Properties
     {
@@ -21,10 +21,11 @@ Shader "Custom/Shader_Circle"
 
         float circle(float2 uv, float2 c, float r)
         {
+            // NOTE: Todo ponto da UV que estiver fora do raio de círculo, pinta de branco
             if (length(uv - c) > r) {
-                return 0;
-            } else {
                 return 1;
+            } else {
+                return 0;
             }
         }
 
@@ -34,7 +35,7 @@ Shader "Custom/Shader_Circle"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float2 uv = IN.uv_MainTex;
-            o.Emission = circle(uv, _Centro, _Raio);
+            o.Emission = circle(uv, _Centro, _Raio) + _Color;
         }
         ENDCG
     }

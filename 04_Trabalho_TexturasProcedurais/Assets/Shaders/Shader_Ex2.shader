@@ -2,11 +2,7 @@ Shader "Custom/Shader_Ex2"
 {
     Properties
     {
-        _ColorDark ("_ColorDark", Color) = (1,1,1,1)
-        _ColorLight ("_ColorLight", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _A ("A", Range(-10, 10)) = 1
-        _B ("B", Range(-10, 10)) = 0
     }
     SubShader
     {
@@ -19,20 +15,21 @@ Shader "Custom/Shader_Ex2"
             float2 uv_MainTex;
         };
 
-        float4 _ColorDark, _ColorLight;
-        float _A, _B;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            // float3 c = _A * IN.uv_MainTex.x + _B;
-            // o.Emission = round(c);
-
             float x = IN.uv_MainTex.x;
-            float f = _A * x + _B;
-            o.Emission = (f + _ColorDark) * _ColorLight;
+            float y = IN.uv_MainTex.y;
 
-            // float3 c = sin(25 * IN.uv_MainTex.x + -1.5) * 0.5 + 0.5;
-            // o.Emission = c;
+            // NOTE: Cria faixas horizontais e verticais
+            float lineH = round(saturate(sin(y * 3.14 * 6) * 0.5 + 0.5));
+            float lineV = round(saturate(sin(x * 3.14 * 6) * 0.5 + 0.5));
 
+            float timeRef = _Time.y;
+            float xadrez = abs(lineH - lineV); // NOTE: Cria o xadrez, convertendo valores negativos em positivos
+            float3 r = xadrez * float3(1, 0, 0) * sin(timeRef); // NOTE: Pinta de vermelho e anima usando SENO
+            float3 g = (1 - xadrez) * float3(0, 1, 0) * cos(timeRef); // NOTE: Pinta de verde e anima usando COSSENO
+
+            o.Emission = abs(r + g); // NOTE: Soma os dois xadrezes
         }
         ENDCG
     }

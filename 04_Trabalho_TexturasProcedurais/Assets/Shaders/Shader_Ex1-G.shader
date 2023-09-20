@@ -19,8 +19,8 @@ Shader "Custom/Shader_Ex1-G"
         float4 _Color;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            float3 base = -1 * IN.uv_MainTex.x + 1;
-            float3 c = round(base) + _Color;
+            float3 base = 1 - IN.uv_MainTex.x; // NOTE: Cria uma textura de branca a preta
+            float3 c = round(base) + _Color; // NOTE: Divide de 2 partes a textura e pinta o preto de azul
             o.Emission = c;
         }
         ENDCG

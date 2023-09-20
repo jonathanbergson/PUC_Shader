@@ -19,9 +19,10 @@ Shader "Custom/Shader_Ex1-K"
         float4 _Color;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
+            // NOTE: Criar faixas verticais e deixa elas entre preto e branch
             float3 left = round(sin(15 * IN.uv_MainTex.x + .4) * 0.5 + 0.5);
-            float3 barL = clamp(left, 0, 1);
-            o.Emission = barL + _Color;
+            float3 barL = saturate(left);
+            o.Emission = barL + _Color; // NOTE: Pinta o preto de azul
         }
         ENDCG
     }

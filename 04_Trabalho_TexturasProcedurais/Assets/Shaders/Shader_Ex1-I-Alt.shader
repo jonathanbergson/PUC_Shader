@@ -1,11 +1,10 @@
-Shader "Custom/Shader_Ex1-B"
+Shader "Custom/Shader_Ex1-I-Alt"
 {
-
     Properties
     {
-        _ColorA ("Color A", Color) = (0, 0, 1, 1)
-        _ColorB ("Color B", Color) = (0, 0, 1, 1)
+        _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _A ("A", Range(-10, 10)) = 1
     }
     SubShader
     {
@@ -18,17 +17,19 @@ Shader "Custom/Shader_Ex1-B"
             float2 uv_MainTex;
         };
 
-        float4 _ColorA, _ColorB;
+        float4 _Color;
+        float _A, _B;
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             float x = IN.uv_MainTex.x;
-            float f = (2 * x + -1);
-            float ff = f * f;
+            float y = IN.uv_MainTex.y;
+            float h = sin(x * 3.14);
+            float v = sin(y * 3.14);
+            float k = round(h);
+            float l = round(v);
 
-            float3 colorA = saturate(ff * -1 + 1 * _ColorA);
-            float3 colorB = saturate(ff * _ColorB);
-
-            o.Emission = colorA + colorB;
+            float i = 1 - (l * k);
+            o.Emission = i + _Color;
         }
         ENDCG
     }

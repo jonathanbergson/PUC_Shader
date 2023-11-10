@@ -5,6 +5,7 @@ Shader "Custom/Water"
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _NoiseTex ("Noise", 2D) = "white" {}
         _Speed ("Speed", Range(0, 10)) = 1.0
+        _Alpha ("Alpha", Range(0, 1)) = 0.8
     }
 
     SubShader
@@ -12,7 +13,7 @@ Shader "Custom/Water"
         Cull Off
 
         CGPROGRAM
-        #pragma surface surf Lambert vertex:vert
+        #pragma surface surf Lambert vertex:vert alpha
 
         sampler2D _NoiseTex, _MainTex;
         float _Speed;
@@ -26,20 +27,23 @@ Shader "Custom/Water"
         {
             o.uv_MainTex = v.texcoord;
 
-            float noiseValue = tex2D(_NoiseTex, v.texcoord).r;
-            v.vertex.y += sin(_Time.y * _Speed + v.vertex.x + v.vertex.z) * noiseValue;
+            float timeRef = _Time.z * 0.05f;
+            float x = v.texcoord.x + timeRef;
+            float y = v.texcoord.y + timeRef;
+            float4 noise = tex2Dlod(_NoiseTex, float4(x, y, 0, 0));
+
+            v.vertex.y = noise.y - 0.3f;
         }
 
         void surf (Input IN, inout SurfaceOutput o)
         {
-            float x = IN.uv_MainTex.x;
-
             float timeRef = _Time.z * 0.05f;
-            float2 uv = IN.uv_MainTex + float2(timeRef, IN.uv_MainTex.y);
+            float2 uv = IN.uv_MainTex + float2(timeRef, timeRef);
             float4 noise = tex2D(_NoiseTex, uv);
+            float4 cian = float4(0, 1, 1, 1);
 
-            float4 red = float4(1, 0, 0, 1);
-            o.Albedo = red;
+            o.Albedo = cian * noise;
+            o.Alpha = 0.8f;
         }
         ENDCG
     }

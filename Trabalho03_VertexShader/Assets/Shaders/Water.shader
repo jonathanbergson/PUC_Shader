@@ -49,3 +49,10 @@ Shader "Custom/Water"
     }
     FallBack "Diffuse"
 }
+
+// [x] Vertex Shader - Displacement Map
+// [x] Texturas
+// [x] Animação
+// [ ] Grabpass
+// [x] Transparência
+// [ ] Tessellation

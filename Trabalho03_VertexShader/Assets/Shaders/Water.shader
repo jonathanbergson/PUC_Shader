@@ -5,9 +5,9 @@ Shader "Custom/Water"
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _NoiseTex ("Noise", 2D) = "white" {}
 
-        _Alpha ("Alpha", Range(0, 1)) = 0.8
-        _Speed ("Speed", Range(0, 10)) = 1.0
-        _Tess ("Tessellation", Range(1,32)) = 4
+        _Color ("Color", Color) = (0,1,1,1)
+        _Alpha ("Alpha", Range(0, 1)) = 0.6
+        _Tess ("Tessellation", Range(1,32)) = 10
     }
 
     SubShader
@@ -20,6 +20,7 @@ Shader "Custom/Water"
 
             sampler2D _MainTex, _NoiseTex;
             float _Alpha, _Speed, _Tess;
+            float4 _Color;
 
             struct Input
             {
@@ -28,13 +29,11 @@ Shader "Custom/Water"
 
             float tess ()
             {
-                return 10;
+                return _Tess;
             }
 
             void vert (inout appdata_full v)
             {
-                // o.uv_MainTex = v.texcoord;
-
                 float timeRef = _Time.z * 0.5f;
                 float x = (v.texcoord.x * 30 + timeRef) * 0.015;
                 float y = (v.texcoord.y * 30 + timeRef) * 0.015;
@@ -49,18 +48,10 @@ Shader "Custom/Water"
                 float2 uv = IN.uv_MainTex * 2 + float2(timeRef, timeRef);
                 float4 noise = tex2D(_NoiseTex, uv) * 3.0f;
 
-                float4 cian = float4(0, 1, 1, 1);
-                o.Albedo = cian * (noise);
+                o.Albedo = _Color * noise;
                 o.Alpha = _Alpha;
             }
             ENDCG
     }
     FallBack "Diffuse"
 }
-
-// [x] Vertex Shader - Displacement Map
-// [x] Texturas
-// [x] Animação
-// [ ] Grabpass
-// [x] Transparência
-// [x] Tessellation
